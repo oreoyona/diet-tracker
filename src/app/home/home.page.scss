@@ -1,27 +1,24 @@
-#container {
-  text-align: center;
+.home{
+  display: flex;
+  height: 100%;
+  animation: colorChange 7s ease-in-out infinite both;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
 
-  color: #8c8c8c;
 
-  margin: 0;
-}
+@keyframes colorChange {
+  0%{
+    background-color: #309563;
+    color: #145c38;
+  }
 
-#container a {
-  text-decoration: none;
+  50%{
+    background-color: #EA7E4A;
+  }
+
+  100%{
+    background-color: #0E393A;
+  }
 }
