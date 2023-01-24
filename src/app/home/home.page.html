@@ -1,8 +1,30 @@
 <ion-content [fullscreen]="true">
 
-  <section class="home">
-    <h2 id="first-heading">Controlez votre consommation d'eau</h2>
-    <h2 id="second-heading">Maintenez votre glycemie dans les normes</h2>
-    <h2 id="third-heading">Envovez des rapports a votre medecin</h2>
-  </section>
+  <section  class="primary-section"  [ngClass]="{'primary-section-p1': page1, 'primary-section-p2': page2, 'primary-section-p3': page3}">
+    <section class="primary-section-header">
+        <h1 [ngClass]="{'primary-section-text-1': page1}" *ngIf="page1">
+            Controllez votre consomation d'eau
+        </h1>
+        <h1 [ngClass]="{'primary-section-text-1-p2': page2}" *ngIf="page2">
+            Maintenez votre glycemie dans les normes
+        </h1>
+        <h1 [ngClass]="{'primary-section-text-1-p3': page3}" *ngIf="page3">
+           Envoyez des rapports a votre medecin
+        </h1>
+    </section>
+
+    <section [ngClass]="{'primary-section-body': page1, 'primary-section-body-p2': page2}">
+        <h4 *ngIf="page1" class="h4-1">
+            <i>Diet-Tracker</i> vous calcule la quantite d'eau dont vous avez besoin selon votre poids et votre sexe
+        </h4>
+
+        <h4 *ngIf="page2" class="h4-2">
+          <i>Diet-Tracker</i> vous rappellera quand mesurer votre glycemie
+        </h4>
+        <h4 *ngIf="page3" class="h4-3">
+          <i>Diet-Tracker</i> enverra des rapports a votre medecin traitant afin que celui-ci suive de pres votre evolution
+        </h4>
+    </section>
+</section>
+
 </ion-content>

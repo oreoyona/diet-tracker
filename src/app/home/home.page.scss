@@ -1,24 +1,80 @@
-.home{
-  display: flex;
-  height: 100%;
-  animation: colorChange 7s ease-in-out infinite both;
 
+@import '../_colors';
+
+$ht-1:170px;
+
+$point-1: 15vw;
+$point-2: 30px;
+$point-3: 12vw;
+$point-4: 11vw;
+$point-5: 10vw;
+
+// CSS for big screens
+
+@media only screen and (min-width: 800px) {
+   :host{
+    display: grid;
+    grid-template-columns: 60% 40%;
+   }
+
+   .primary-section{
+    grid-column: 1;
+   }
+   .login-component{
+    grid-column: 2;
+   }
+  }
+*{
+    transition: all 1s ease-in-out;
+}
+
+.primary-section{
+    padding: 30px 30px 0 30px;
+    height: 100%;
+}
+.primary-section-p1{
+    background-color: $bg-1;
+}
+.primary-section-p2{
+    background-color: $bg-2;
+}
+.primary-section-p3{
+    background-color: $bg-3;
+}
+
+h1{
+    font-family: monospace, "Helvetica Neue", Roboto, sans-serif;
+    font-size: 1.7em;
+    font-weight: 400;
+    margin: 0 0 $point-2 0;
+}
+.primary-section-text-1, .primary-section-text-1-p3{
+    color: $bg-2;
+   
+}
+.primary-section-text-1-p2{
+    color: $bg-1;
 }
 
 
 
 
-@keyframes colorChange {
-  0%{
-    background-color: #309563;
-    color: #145c38;
-  }
+h4{
+    font-weight: 300;
+    line-height: 1.5em;
+    
+}
+.h4-1{
+    color: $bg-2;
+}
+.h4-2{
+    color: $bg-1;
+}
+footer{
+    padding-top: 10px;
+}
 
-  50%{
-    background-color: #EA7E4A;
-  }
-
-  100%{
-    background-color: #0E393A;
-  }
+#startBtn{
+  background-color: inherit !important;
+  color: inherit !important;
 }
