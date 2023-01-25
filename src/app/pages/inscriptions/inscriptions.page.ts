@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, RequiredValidator, Validators} from "@angular/forms";
+import { Router } from '@angular/router';
 import { Auth } from 'src/app/common/interfaces/auth';
 import { AuthService } from 'src/app/common/services/auth.service';
 @Component({
@@ -37,8 +38,11 @@ export class InscriptionsPage implements OnInit {
             password: value.password
           }
 
-          console.log("les donnes a envoyer sont", val)
+          console.log("les donnes a envoyer sont", val);
+          this.router.navigate(['inscription/options']);
     }
+
+    
       
 
 
@@ -82,7 +86,7 @@ export class InscriptionsPage implements OnInit {
 
 
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
       const date = new Date();
       const hour = date.getHours();
       this.getStartMessage(hour);

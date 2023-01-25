@@ -1,13 +1,36 @@
-<ion-radio-group lines="full" formControlName="sexe" required >
-  <ion-list-header>
-    <ion-label >Sexe</ion-label>
-  </ion-list-header>
-  <ion-item class="sexe">
-    <ion-label>Homme</ion-label>
-    <ion-radio slot="start" value="homme" checked></ion-radio>
-  </ion-item>
-  <ion-item class="sexe">
-    <ion-label>Femme</ion-label>
-    <ion-radio slot="start" value="femme"></ion-radio>
-  </ion-item>
-</ion-radio-group>
+<ion-content fullscreen="true">
+  <section class="inscriptionForm">
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate>
+      <ion-list>
+        <ion-radio-group>
+          <ion-item>
+            <ion-label>Mr ou Mme ?</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Homme</ion-label>
+            <ion-radio value="homme"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Femme</ion-label>
+            <ion-radio value="femme">Femme</ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+
+
+
+
+        <ion-row>
+          <ion-col class="submitCol">
+            <ion-button type="submit" color="primary" expand="block" class="submitBtn"
+              [disabled]="optionForm.invalid">suivant</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+    </form>
+  </section>
+
+</ion-content>
