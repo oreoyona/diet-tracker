@@ -3,37 +3,37 @@
     <form [formGroup]="inscriptionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
       <ion-item lines="full">
         <ion-label position="floating">Nom</ion-label>
-        <ion-input type="text" required formControlName="name"></ion-input>
+        <ion-input type="text" required formControlName="name" class="custumInput"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">Age</ion-label>
-        <ion-input type="number" required></ion-input>
+        <ion-input inputmode="numeric" type="number" required class="custumInput"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" required formControlName="email"></ion-input>
+        <ion-input type="email" required formControlName="email" class="custumInput"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">Mot de passe</ion-label>
-        <ion-input type="password" required formControlName="password"></ion-input>
+        <ion-input type="password" required formControlName="password" class="custumInput"></ion-input>
       </ion-item>
       <!-- Radio buttons -->
-      <ion-radio-group lines="full" formControlName="sexe">
+      <ion-radio-group lines="full" formControlName="sexe" required >
         <ion-list-header>
-          <ion-label>Sexe</ion-label>
+          <ion-label >Sexe</ion-label>
         </ion-list-header>
-        <ion-item>
+        <ion-item class="sexe">
           <ion-label>Homme</ion-label>
           <ion-radio slot="start" value="homme" checked></ion-radio>
         </ion-item>
-        <ion-item>
+        <ion-item class="sexe">
           <ion-label>Femme</ion-label>
           <ion-radio slot="start" value="femme"></ion-radio>
         </ion-item>
       </ion-radio-group>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="danger" expand="block" class="submitBtn">Submit</ion-button>
+          <ion-button type="submit" color="danger" expand="block" class="submitBtn">suivant</ion-button>
         </ion-col>
       </ion-row>
     </form>
