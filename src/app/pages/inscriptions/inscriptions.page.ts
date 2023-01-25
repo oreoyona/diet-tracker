@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup} from "@angular/forms";
+import { FormControl, FormGroup, RequiredValidator, Validators} from "@angular/forms";
+import { Auth } from 'src/app/common/interfaces/auth';
 import { AuthService } from 'src/app/common/services/auth.service';
 @Component({
   selector: 'app-inscriptions',
@@ -14,15 +15,13 @@ export class InscriptionsPage implements OnInit {
 
 
   connexionForm = new FormGroup({
-      email: new FormControl(''),
+      email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('')
   })
 
   inscriptionForm = new FormGroup({
-      email: new FormControl(''),
-      name: new FormControl(''),
-      password: new FormControl(''),
-      sexe: new FormControl(''),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
 
   });
 
@@ -30,8 +29,19 @@ export class InscriptionsPage implements OnInit {
    * newUser - register a new user to the application
    * @param value : the infromations about the new user 
    */
-  newUser = (value: any) =>{
-      console.log(value)
+  newUser = (value: Partial<{ email: string | null; password: string | null; }>) =>{
+    if(value.email && value.password)
+    {
+        const val: Auth = {
+            email: value.email,
+            password: value.password
+          }
+
+          console.log("les donnes a envoyer sont", val)
+    }
+      
+
+
   }
 
   

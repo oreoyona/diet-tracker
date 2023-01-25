@@ -2,41 +2,46 @@
   <section class="inscriptionForm">
     <form [formGroup]="inscriptionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
       <ion-item lines="full">
-        <ion-label position="floating">Nom</ion-label>
-        <ion-input type="text" required formControlName="name" class="custumInput"></ion-input>
-      </ion-item>
-      <ion-item lines="full">
-        <ion-label position="floating">Age</ion-label>
-        <ion-input inputmode="numeric" type="number" required class="custumInput"></ion-input>
-      </ion-item>
-      <ion-item lines="full">
         <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" required formControlName="email" class="custumInput"></ion-input>
+        <ion-input type="email" required formControlName="email" class="custumInput" autocomplete="off"
+          required=""></ion-input>
+        <ion-note slot="error" *ngIf="inscriptionForm.dirty">Cette adresse n'est pas valide</ion-note>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">Mot de passe</ion-label>
         <ion-input type="password" required formControlName="password" class="custumInput"></ion-input>
+        <ion-note slot="helper">8 charactères au minimum</ion-note>
+        <ion-note slot="error" 
+        *ngIf="inscriptionForm.controls.password.touched || 
+        inscriptionForm.controls.password.dirty
+      && inscriptionForm.controls.password.invalid">8 charactères au minimum</ion-note>
       </ion-item>
-      <!-- Radio buttons -->
-      <ion-radio-group lines="full" formControlName="sexe" required >
-        <ion-list-header>
-          <ion-label >Sexe</ion-label>
-        </ion-list-header>
-        <ion-item class="sexe">
-          <ion-label>Homme</ion-label>
-          <ion-radio slot="start" value="homme" checked></ion-radio>
-        </ion-item>
-        <ion-item class="sexe">
-          <ion-label>Femme</ion-label>
-          <ion-radio slot="start" value="femme"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
+
+
+
+
       <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="danger" expand="block" class="submitBtn">suivant</ion-button>
+        <ion-col class="submitCol">
+          <ion-button type="submit" color="primary" expand="block" class="submitBtn"
+            [disabled]="inscriptionForm.invalid">suivant</ion-button>
         </ion-col>
       </ion-row>
     </form>
+    <hr>
+    <ion-row class="alternateSignUp">
+      <ion-label>Inscrivez-vous avec: </ion-label>
+      <hr>
+      <ion-col>
+        <button class="googleBtn">
+          <i>
+            <ion-icon name="logo-google" class="googleIcon"></ion-icon>
+          </i>
+          s'inscrire avec google
+        </button>
+      </ion-col>
+
+
+    </ion-row>
   </section>
-  
+
 </ion-content>

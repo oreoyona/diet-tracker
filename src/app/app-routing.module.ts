@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'inscriptions',
     loadChildren: () => import('./pages/inscriptions/inscriptions.module').then( m => m.InscriptionsPageModule)
   },
+  {
+    path: 'profile-setting',
+    loadChildren: () => import('./pages/profile-setting/profile-setting.module').then( m => m.ProfileSettingPageModule)
+  },
 ];
 
 @NgModule({
