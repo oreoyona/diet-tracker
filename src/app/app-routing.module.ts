@@ -6,10 +6,19 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
+
+  {
+    path: 'inscription',
+    loadChildren: () => import('./pages/inscriptions/inscriptions.module').then( m => m.InscriptionsPageModule)
+  },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'inscriptions',
+    loadChildren: () => import('./pages/inscriptions/inscriptions.module').then( m => m.InscriptionsPageModule)
   },
 ];
 

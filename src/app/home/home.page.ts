@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
+[x: string]: any;
   page1 = true;
   page2 = false;
   page3 = false;
+
+  appTitle  = "Tracker";
+  startMsg = "Commencer";
 
   /**
       * changeToPage1 - change the value of page1 to true
