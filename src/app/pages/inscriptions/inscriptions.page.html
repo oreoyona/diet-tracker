@@ -1,31 +1,39 @@
 <ion-content fullscreen="true">
   <section class="inscriptionForm">
-    <form>
+    <form [formGroup]="inscriptionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
       <ion-item lines="full">
         <ion-label position="floating">Nom</ion-label>
-        <ion-input type="text" required></ion-input>
+        <ion-input type="text" required formControlName="name"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">Age</ion-label>
         <ion-input type="number" required></ion-input>
       </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" required formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input type="password" required formControlName="password"></ion-input>
+      </ion-item>
       <!-- Radio buttons -->
-      <ion-radio-group lines="full">
+      <ion-radio-group lines="full" formControlName="sexe">
         <ion-list-header>
           <ion-label>Sexe</ion-label>
         </ion-list-header>
         <ion-item>
           <ion-label>Homme</ion-label>
-          <ion-radio slot="start" value="male" checked></ion-radio>
+          <ion-radio slot="start" value="homme" checked></ion-radio>
         </ion-item>
         <ion-item>
           <ion-label>Femme</ion-label>
-          <ion-radio slot="start" value="female"></ion-radio>
+          <ion-radio slot="start" value="femme"></ion-radio>
         </ion-item>
       </ion-radio-group>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+          <ion-button type="submit" color="danger" expand="block" class="submitBtn">Submit</ion-button>
         </ion-col>
       </ion-row>
     </form>

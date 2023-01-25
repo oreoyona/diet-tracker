@@ -11,15 +11,7 @@ export class InscriptionsPage implements OnInit {
   startMessage = "Bonjour";
   visible = false;
   inscription = true;
-  connexionFrom = false;
-  hide = true;
-  todo = {
-    title: "",
-    description: ""
-  }
-  logForm() {
-    console.log(this.todo)
-  }
+
 
   connexionForm = new FormGroup({
       email: new FormControl(''),
@@ -28,13 +20,10 @@ export class InscriptionsPage implements OnInit {
 
   inscriptionForm = new FormGroup({
       email: new FormControl(''),
-      nom: new FormControl(''),
-      mdp: new FormGroup(
-          {
-              password: new FormControl(''),
-              password2: new FormControl('')
-          }
-      )
+      name: new FormControl(''),
+      password: new FormControl(''),
+      sexe: new FormControl(''),
+
   });
 
   /**
