@@ -1,19 +1,25 @@
 <ion-content fullscreen="true">
-  <section class="inscriptionForm">
-    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate>
+
+  <section class="configMsg" *ngIf="configMsg">
+    <ion-label>Creeons maintenant votre profil</ion-label>
+
+    <ion-button (click)="showOptions()">D'accord</ion-button>
+  </section>
+  <section class="inscriptionForm" >
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && !showOptionTwo && !showOptionThree">
       <ion-list>
-        <ion-radio-group>
+        <ion-radio-group formControlName="sexe">
           <ion-item>
-            <ion-label>Mr ou Mme ?</ion-label>
+            <ion-label color="medium">Vous etes ?</ion-label>
           </ion-item>
 
           <ion-item>
-            <ion-label>Homme</ion-label>
+            <ion-label>Un homme</ion-label>
             <ion-radio value="homme"></ion-radio>
           </ion-item>
 
           <ion-item>
-            <ion-label>Femme</ion-label>
+            <ion-label>Une femme</ion-label>
             <ion-radio value="femme">Femme</ion-radio>
           </ion-item>
         </ion-radio-group>
@@ -24,13 +30,71 @@
 
         <ion-row>
           <ion-col class="submitCol">
-            <ion-button type="submit" color="primary" expand="block" class="submitBtn"
-              [disabled]="optionForm.invalid">suivant</ion-button>
+            <ion-button tcolor="primary" expand="block" class="submitBtn"
+              [disabled]="optionForm.controls.sexe.invalid" (click)="optionTwo()">suivant</ion-button>
           </ion-col>
         </ion-row>
       </ion-list>
 
     </form>
+
+
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && showOptionTwo && !showOptionThree">
+      <ion-list>
+          <ion-item>
+            <ion-label color="medium">Quel age avez-vous ?</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Votre age</ion-label>
+            <ion-input type="number" formControlName="age"></ion-input>
+          </ion-item>
+
+        <ion-row>
+          <ion-col class="submitCol">
+            <ion-button tcolor="primary" expand="block" class="submitBtn"
+              [disabled]="optionForm.controls.age.invalid" (click)="optionThree()">suivant</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+    </form>
+
+
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && !showOptionTwo && showOptionThree">
+      <ion-list>
+        <ion-radio-group formControlName="diabetes">
+          <ion-item>
+            <ion-label color="medium">Souffrez-vous de diabete ?</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Oui</ion-label>
+            <ion-radio value="yes"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Non</ion-label>
+            <ion-radio value="no"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+
+
+
+
+        <ion-row>
+          <ion-col class="submitCol">
+            <ion-button tcolor="primary" expand="block" class="submitBtn"
+              [disabled]="optionForm.controls.age.invalid" (click)="lastStep()">suivant</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+    </form>
+
+
+
   </section>
 
 </ion-content>

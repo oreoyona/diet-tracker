@@ -1,3 +1,17 @@
+@media (prefers-color-scheme: light) {
+    ion-content{
+        --background: #f4f5f8 !important;
+    }
+   
+    .googleBtn{
+        background-color: white !important;
+        box-shadow: 1px white;
+        filter: drop-shadow(0 0 0.75rem white);
+
+        
+    }
+  }
+
 .inscriptionForm{
     width: 100%;
     height: 100%;
@@ -28,19 +42,22 @@
 
 }
 .googleBtn{
-    padding: 12px;
+    padding: 8px 10px;
     width: 14em;
-    border-radius: 20px;
-    background-color: #3880FF;
+    border-radius: 10px;
+    background-color: #f4f5f8;
+    color: #92949c;
     text-align: center;
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 4px;
-    font-size: 1.2rem;
+    box-shadow: 1px #f4f5f8;
+    filter: drop-shadow(0 0 0.015rem #f4f5f8);
+
 }
 .googleIcon{
-    font-size: 1.2rem;
+    font-size: 1.18rem;
 }
 
 ion-item{
