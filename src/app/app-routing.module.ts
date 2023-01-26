@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'profile-setting',
     loadChildren: () => import('./pages/profile-setting/profile-setting.module').then( m => m.ProfileSettingPageModule)
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
 ];
 
 @NgModule({

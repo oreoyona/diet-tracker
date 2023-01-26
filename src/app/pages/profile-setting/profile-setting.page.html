@@ -1,16 +1,15 @@
 <ion-content fullscreen="true">
 
   <section class="configMsg" *ngIf="configMsg">
-    <ion-label>Creeons maintenant votre profil</ion-label>
+    <ion-label ion-text>Créons maintenant votre profil</ion-label>
 
     <ion-button (click)="showOptions()">D'accord</ion-button>
   </section>
-  <section class="inscriptionForm" >
-    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && !showOptionTwo && !showOptionThree">
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && !showOptionTwo && !showOptionThree && !showLastStep">
       <ion-list>
         <ion-radio-group formControlName="sexe">
           <ion-item>
-            <ion-label color="medium">Vous etes ?</ion-label>
+            <ion-label color="medium">Vous êtes ?</ion-label>
           </ion-item>
 
           <ion-item>
@@ -42,11 +41,11 @@
     <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && showOptionTwo && !showOptionThree">
       <ion-list>
           <ion-item>
-            <ion-label color="medium">Quel age avez-vous ?</ion-label>
+            <ion-label color="medium">Quel âge avez-vous ?</ion-label>
           </ion-item>
 
           <ion-item>
-            <ion-label>Votre age</ion-label>
+            <ion-label>Votre âge</ion-label>
             <ion-input type="number" formControlName="age"></ion-input>
           </ion-item>
 
@@ -65,7 +64,7 @@
       <ion-list>
         <ion-radio-group formControlName="diabetes">
           <ion-item>
-            <ion-label color="medium">Souffrez-vous de diabete ?</ion-label>
+            <ion-label color="medium">Souffrez-vous de diabète ?</ion-label>
           </ion-item>
 
           <ion-item>
@@ -86,15 +85,33 @@
         <ion-row>
           <ion-col class="submitCol">
             <ion-button tcolor="primary" expand="block" class="submitBtn"
-              [disabled]="optionForm.controls.age.invalid" (click)="lastStep()">suivant</ion-button>
+              [disabled]="optionForm.controls.diabetes.invalid" (click)="lastStep()">suivant</ion-button>
           </ion-col>
         </ion-row>
       </ion-list>
 
     </form>
 
+    <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate *ngIf="!configMsg && !showOptionTwo && !showOptionThree && showLastStep">
+      <ion-list>
+        <ion-item>
+          <ion-label color="medium">
+            Comment vous appelez-vous ?
+          </ion-label>
+        </ion-item>
 
+        <ion-item>
+          <ion-input formControlName="name" placeholder="Ex. Jean Kasongo"></ion-input>
+        </ion-item>
 
-  </section>
+        <ion-row>
+          <ion-col class="submitCol">
+            <ion-button tcolor="primary" expand="block" class="submitBtn"
+              [disabled]="optionForm.controls.name.invalid" type="submit">Enregistrer</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+    </form>
 
 </ion-content>

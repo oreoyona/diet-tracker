@@ -1,10 +1,15 @@
+@import '../../mixins';
 .configMsg{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    @include flex-center;
      ion-button{
         margin-top: 50px;
      }
+}
+
+ion-list, form{
+   width: 100%;
+   @include flex-center;
+   ion-button{
+      margin-top: 50px;
+   }
 }

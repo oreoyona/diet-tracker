@@ -26,19 +26,22 @@ export class ProfileSettingPage implements OnInit {
   }
 
   lastStep = ()=>{
-
+    this.showLastStep = true;
+    this.showOptionThree = false;
+    this.showOptionTwo = false;
+    this.configMsg = false;
   }
   optionForm = new FormGroup({
     sexe: new FormControl('', Validators.required),
-    age: new FormControl(''),
-    name: new FormControl(''),
-    diabetes: new FormControl('')
+    age: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    diabetes: new FormControl('', Validators.required)
 
   })
 
   addProfile =(data: FormGroup)=>{
     if (data.valid){
-      console.log(data.value);
+      
     }
   }
   constructor() { }
