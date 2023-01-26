@@ -1,5 +1,36 @@
 <ion-content fullscreen="true">
-  <section class="inscriptionForm">
+  <section class="connexion inscriptionForm" *ngIf="!inscription">
+    <form [formGroup]="connexionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
+      <ion-item lines="full">
+        <ion-label position="floating" color="medium">Email</ion-label>
+        <ion-input type="email" required formControlName="email" class="custumInput" autocomplete="off"
+          required=""></ion-input>
+        <ion-note slot="error" *ngIf="inscriptionForm.dirty">Cette adresse n'est pas valide</ion-note>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating" color="medium">Mot de passe</ion-label>
+        <ion-input type="password" required formControlName="password" class="custumInput"></ion-input>
+        <ion-note slot="helper">8 charactères au minimum</ion-note>
+        <ion-note slot="error" 
+        *ngIf="inscriptionForm.controls.password.touched || 
+        inscriptionForm.controls.password.dirty
+      && inscriptionForm.controls.password.invalid">8 charactères au minimum</ion-note>
+      </ion-item>
+
+
+
+
+      <ion-row>
+        <ion-col class="submitCol">
+          <ion-button type="submit" color="primary" expand="block" class="submitBtn"
+            [disabled]="inscriptionForm.invalid">Connexion</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </section>
+
+
+  <section class="inscriptionForm" *ngIf="inscription">
     <form [formGroup]="inscriptionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
       <ion-item lines="full">
         <ion-label position="floating" color="medium">Email</ion-label>
@@ -38,6 +69,21 @@
           </i>
           s'inscrire avec google
         </button>
+      </ion-col>
+
+
+    </ion-row>
+
+
+    <hr>
+    <ion-row class="alternateSignUp">
+      <ion-col>
+        <ion-item>
+          <ion-label color="medium">Déjà inscrit ?: </ion-label>
+          <a (click)="showConnexionForm()" class="connect">
+            <ion-label>Connectez-vous</ion-label>
+          </a>
+        </ion-item>
       </ion-col>
 
 
