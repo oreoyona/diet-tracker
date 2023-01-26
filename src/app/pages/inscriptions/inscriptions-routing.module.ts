@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/common/auth.guard';
 import { ProfileSettingPage } from '../profile-setting/profile-setting.page';
 
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path:'options',
-    component: ProfileSettingPage
+    component: ProfileSettingPage,
+    canActivate: [AuthGuard]
   }
 ];
 

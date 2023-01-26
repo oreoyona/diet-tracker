@@ -10,5 +10,11 @@ export class AuthService {
     return this.http.post('/api/auth', value)
 }
 
+  isLoggedIn = false;
+
+  isAuth(){
+    return this.isLoggedIn;
+  }
+
   constructor(private http: HttpClient) { }
 }

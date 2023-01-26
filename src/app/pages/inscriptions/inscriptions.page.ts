@@ -14,7 +14,9 @@ export class InscriptionsPage implements OnInit {
   visible = false;
   inscription = true;
 
-
+  signUpWithGoogle = ()=>{
+    
+  }
   connexionForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('')
