@@ -7,6 +7,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class ProfileSettingPage implements OnInit {
+  configMsg = true;
+  showOptions = ()=>{
+    this.configMsg = false;
+  }
   optionForm = new FormGroup({
     sexe: new FormControl(''),
     age: new FormControl(''),

@@ -1,19 +1,25 @@
 <ion-content fullscreen="true">
-  <section class="inscriptionForm">
+
+  <section class="configMsg" *ngIf="configMsg">
+    <ion-label>Creeons maintenant votre profil</ion-label>
+
+    <ion-button (click)="showOptions()">D'accord</ion-button>
+  </section>
+  <section class="inscriptionForm" *ngIf="!configMsg">
     <form [formGroup]="optionForm" (ngSubmit)="addProfile(optionForm)" novalidate>
       <ion-list>
         <ion-radio-group>
           <ion-item>
-            <ion-label>Mr ou Mme ?</ion-label>
+            <ion-label color="medium">Vous etes ?</ion-label>
           </ion-item>
 
           <ion-item>
-            <ion-label>Homme</ion-label>
+            <ion-label>Un homme</ion-label>
             <ion-radio value="homme"></ion-radio>
           </ion-item>
 
           <ion-item>
-            <ion-label>Femme</ion-label>
+            <ion-label>Une femme</ion-label>
             <ion-radio value="femme">Femme</ion-radio>
           </ion-item>
         </ion-radio-group>
