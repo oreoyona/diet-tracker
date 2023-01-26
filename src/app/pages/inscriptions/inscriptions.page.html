@@ -2,13 +2,13 @@
   <section class="inscriptionForm">
     <form [formGroup]="inscriptionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
       <ion-item lines="full">
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating" color="medium">Email</ion-label>
         <ion-input type="email" required formControlName="email" class="custumInput" autocomplete="off"
           required=""></ion-input>
         <ion-note slot="error" *ngIf="inscriptionForm.dirty">Cette adresse n'est pas valide</ion-note>
       </ion-item>
       <ion-item lines="full">
-        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-label position="floating" color="medium">Mot de passe</ion-label>
         <ion-input type="password" required formControlName="password" class="custumInput"></ion-input>
         <ion-note slot="helper">8 charactères au minimum</ion-note>
         <ion-note slot="error" 
@@ -29,12 +29,12 @@
     </form>
     <hr>
     <ion-row class="alternateSignUp">
-      <ion-label>Inscrivez-vous avec: </ion-label>
+      <ion-label color="medium">Inscrivez-vous avec: </ion-label>
       <hr>
       <ion-col>
-        <button class="googleBtn">
+        <button class="googleBtn" color="medium">
           <i>
-            <ion-icon name="logo-google" class="googleIcon"></ion-icon>
+            <ion-icon src="../../../assets/icon/google.svg" class="googleIcon"></ion-icon>
           </i>
           s'inscrire avec google
         </button>
