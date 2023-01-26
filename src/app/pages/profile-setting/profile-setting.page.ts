@@ -10,6 +10,7 @@ export class ProfileSettingPage implements OnInit {
   configMsg = true;
   showOptionTwo = false;
   showOptionThree = false;
+  showLastStep = false;
   showOptions = ()=>{
     this.configMsg = false;
   }
@@ -22,6 +23,10 @@ export class ProfileSettingPage implements OnInit {
     this.showOptionThree = true;
     this.showOptionTwo = false;
     this.configMsg = false;
+  }
+
+  lastStep = ()=>{
+
   }
   optionForm = new FormGroup({
     sexe: new FormControl('', Validators.required),
