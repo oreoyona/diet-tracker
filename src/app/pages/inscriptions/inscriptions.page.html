@@ -1,20 +1,20 @@
 <ion-content fullscreen="true">
   <section class="connexion inscriptionForm" *ngIf="!inscription">
-    <form [formGroup]="connexionForm" (ngSubmit)="newUser(inscriptionForm.value)" novalidate>
+    <form [formGroup]="connexionForm" (ngSubmit)="connexion(connexionForm)" novalidate>
       <ion-item lines="full">
         <ion-label position="floating" color="medium">Email</ion-label>
         <ion-input type="email" required formControlName="email" class="custumInput" autocomplete="off"
           required=""></ion-input>
-        <ion-note slot="error" *ngIf="inscriptionForm.dirty">Cette adresse n'est pas valide</ion-note>
+        <ion-note slot="error" *ngIf="connexionForm.controls.password.touched &&connexionForm.controls.email.dirty && connexionForm.controls.email.invalid ">Cette adresse n'est pas valide</ion-note>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating" color="medium">Mot de passe</ion-label>
         <ion-input type="password" required formControlName="password" class="custumInput"></ion-input>
         <ion-note slot="helper">8 charactères au minimum</ion-note>
         <ion-note slot="error" 
-        *ngIf="inscriptionForm.controls.password.touched || 
-        inscriptionForm.controls.password.dirty
-      && inscriptionForm.controls.password.invalid">8 charactères au minimum</ion-note>
+        *ngIf="connexionForm.controls.password.touched && 
+        connexionForm.controls.password.dirty
+      && connexionForm.controls.password.invalid">8 charactères au minimum</ion-note>
       </ion-item>
 
 
@@ -23,10 +23,42 @@
       <ion-row>
         <ion-col class="submitCol">
           <ion-button type="submit" color="primary" expand="block" class="submitBtn"
-            [disabled]="inscriptionForm.invalid">Connexion</ion-button>
+            [disabled]="connexionForm.invalid">Connexion</ion-button>
         </ion-col>
       </ion-row>
     </form>
+
+    <ion-row class="alternateSignUp">
+      <ion-label color="medium">Connectez-vous avec: </ion-label>
+      <hr>
+      <ion-col>
+        <button class="googleBtn" color="medium" (click)="signUpWithGoogle()">
+          <i>
+            <ion-icon src="../../../assets/icon/google.svg" class="googleIcon"></ion-icon>
+          </i>
+          s'inscrire avec google
+        </button>
+      </ion-col>
+
+
+    </ion-row>
+    
+    <hr>
+    <ion-row class="alternateSignUp">
+      <hr>
+      <hr>
+      <hr>
+      <ion-col>
+        <span class="connect">
+          <ion-label color="medium">Pas encore inscrit ? </ion-label>
+          <a (click)="showConnexionForm()" id="connect">
+            <ion-label>Inscrivez-vous</ion-label>
+          </a>
+        </span>
+      </ion-col>
+
+
+    </ion-row>
   </section>
 
 
@@ -77,13 +109,16 @@
 
     <hr>
     <ion-row class="alternateSignUp">
+      <hr>
+      <hr>
+      <hr>
       <ion-col>
-        <ion-item>
-          <ion-label color="medium">Déjà inscrit ?: </ion-label>
-          <a (click)="showConnexionForm()" class="connect">
+        <span class="connect">
+          <ion-label color="medium">Déjà inscrit ? </ion-label>
+          <a (click)="showConnexionForm()" id="connect">
             <ion-label>Connectez-vous</ion-label>
           </a>
-        </ion-item>
+        </span>
       </ion-col>
 
 

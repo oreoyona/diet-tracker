@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, RequiredValidator, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
-import { Auth } from 'src/app/common/interfaces/auth';
+import { Auth, Users } from 'src/app/common/interfaces/auth';
 import { AuthService } from 'src/app/common/services/auth.service';
 @Component({
   selector: 'app-inscriptions',
@@ -13,17 +13,17 @@ export class InscriptionsPage implements OnInit {
   startMessage = "Bonjour";
   visible = false;
   inscription = true;
-
+  userBase = this.auth.userBase;
   signUpWithGoogle = ()=>{
     
   }
 
   showConnexionForm = ()=>{
-    this.inscription = false;
+    this.inscription = !this.inscription;
   }
   connexionForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('')
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
   })
 
   inscriptionForm = new FormGroup({
@@ -59,10 +59,20 @@ export class InscriptionsPage implements OnInit {
    * - connexion: makes an HTTP request to login the user
    * @value : the object containg the credentials of the user
    */
-  connexion = (value: any) => {
-      this.auth.login(value).subscribe( res => {
-          console.log(res)
-      })
+  connexion = (value: FormGroup) => {
+      
+      if (value.valid){
+        const email =  value.value.email;
+        const password = value.value.password;
+
+        this.userBase.forEach((el: Users)=>{
+          if (el.email == email && el.password === password){
+            this.auth.isLoggedIn = true;
+            localStorage.setItem('logged', JSON.stringify(el));
+            this.router.navigate(['./dashboard']);
+          }
+        })
+      }
    
   }
 
@@ -99,6 +109,7 @@ export class InscriptionsPage implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.removeItem('logged');
       
   }
 

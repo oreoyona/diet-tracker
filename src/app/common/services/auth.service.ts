@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
+import { Users } from '../interfaces/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class AuthService {
   isAuth(){
     return this.isLoggedIn;
   }
+
+  //dumb data
+  gloire = new Users('Gloire Chabu', 26, 'cortesgloire@gmail.com', false, 0, '71215918');
+  userBase:[Users] = [this.gloire]
 
   constructor(private http: HttpClient) { }
 }
