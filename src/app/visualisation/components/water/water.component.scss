@@ -1,8 +1,19 @@
+@media(prefers-color-scheme: dark){
+    .outer{
+        box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15), -6px -6px 10px -1px rgba(22, 21, 21, 0.7) !important;
+
+    }
+    .inner{
+        box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2), 
+        inset -4px -4px 6px -1px rgba(5, 27, 33, 0.7), -0.5px -0.5px 0px rgb(26, 23, 23),
+        0.5px 0.5px 0px rgba(0,0,0,0.15), 0px 12px 10px -10px rgba(0,0,0,0.05) !important;
+    }
+
+}
 :host{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
 }
 .skill{
     position: relative;

@@ -1,5 +1,5 @@
-import { Component, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, HostBinding, Inject, OnChanges, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-water',
   templateUrl: './water.component.html',
@@ -9,14 +9,14 @@ export class WaterComponent implements OnInit, OnChanges {
   
   @HostBinding('attr.style')
   public get Value(){
-    return this.sanitiser.bypassSecurityTrustStyle(`--value: ${this.value}`)
+    return this.document.documentElement.style.setProperty("--value", `${this.value}`)
 
   }
 
  
   value = (450 - 450 * 0.43);
 
-  constructor(private sanitiser: DomSanitizer) { }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
   ngOnChanges(change: any){
     
   }
