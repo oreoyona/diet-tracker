@@ -16,13 +16,16 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <app-water/>
+    <ng-container *ngIf="currentUser.numberOfCup/cupGoal >= 0">
+      <app-water [numberOfCups]="currentUser.numberOfCup" [totalOfCups]="cupGoal" />
+    </ng-container>
+    
 
 
     <section class="stats-container">
       <ion-card color="danger">
         <ion-card-content class="water-stats-menu">
-          <h3 ion-text>
+          <h3 ion-text style="font-size: large;">
             6/13
           </h3>
         </ion-card-content>
@@ -36,21 +39,27 @@
           <div class="menu-label-container">
             <p class="menu-label" ion-text>+1 verre</p>
           </div>
+
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card color="success" style="color: white;">
+        <ion-card-content class="water-stats-menu">
+          <div class="ripple">
+            <ion-icon name="restaurant-outline"></ion-icon><br>
+          </div>
+          <div class="menu-label-container">
+            <p class="menu-label" ion-text>2256 calories</p>
+          </div>
           
         </ion-card-content>
       </ion-card>
+      <app-chart [data]="data"/>
+    </section>
 
-
-      <ion-card color="success">
-        <ion-card-content class="water-stats-menu">
-          <h3 ion-text>
-            6/13
-          </h3>
-        </ion-card-content>
-      </ion-card>
-</section>
+   
   </ion-content>
 
- 
-</div>
 
+</div>

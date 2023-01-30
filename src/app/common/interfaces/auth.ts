@@ -3,28 +3,84 @@ export interface Auth {
     password: string
 }
 
-export interface User{
+export interface Sexe {
+
+}
+
+export interface User {
     name: string,
     age: number,
     email: string,
     diabetes: boolean,
-    numberOfCup: number
+    numberOfCup: number,
 }
-export class Users{
+export class Users {
     name: string = '';
     age = 18;
     email = '';
     diabetes = false;
     numberOfCup = 0;
-    password = '';
+    password?= '';
+    md_number?: number ;
+    sexe? = '';
 
-    constructor(name: string, age: number, email: string, diabetes: boolean, numberOfCup: number, password: string){
+    /**
+     * addCup - adds a cup of water to the user
+     * return: void
+     */
+    addCup() {
+        this.numberOfCup += 1;
+    }
+
+    public get cups() {
+        return this.numberOfCup;
+    }
+
+    public get doctor(){
+        if (this.md_number)
+        return this.md_number;
+        else return 0;
+    }
+
+    public set doctor(num: number){
+        this.md_number = num;
+    }
+
+
+
+    
+
+
+    constructor(
+        name: string,
+        age: number,
+        email: string,
+        diabetes: boolean,
+        numberOfCup: number,
+        password?: string,
+        md_number?:number,
+        sexe?: string,
+        ) {
+
+
         this.name = name;
         this.age = age;
         this.email = email;
         this.diabetes = diabetes;
         this.numberOfCup = numberOfCup;
         this.password = password;
+        this.md_number = md_number;
+        this.sexe = sexe
 
     }
 }
+
+
+export class Homme extends Users{
+    recommandedFluids = 11 * this.numberOfCup;
+
+    constructor(){
+        super('',18,'', false, 0, undefined, undefined, 'homme');
+    }
+}
+

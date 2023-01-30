@@ -7,6 +7,7 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { WaterComponent } from 'src/app/visualisation/components/water/water.component';
+import { ChartComponent } from 'src/app/visualisation/components/charts/chart/chart.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { WaterComponent } from 'src/app/visualisation/components/water/water.com
     IonicModule,
     DashboardPageRoutingModule
   ],
-  declarations: [DashboardPage, WaterComponent]
+  declarations: [DashboardPage, WaterComponent, ChartComponent]
 })
 export class DashboardPageModule {}
