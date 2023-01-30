@@ -1,17 +1,18 @@
-import { Component, HostBinding, Inject, Input, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { Component, HostBinding, Inject, Input, OnChanges, OnInit, SimpleChange, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 @Component({
   selector: 'app-water',
   templateUrl: './water.component.html',
   styleUrls: ['./water.component.scss'],
 })
-export class WaterComponent implements OnInit, OnChanges {
+export class WaterComponent implements OnInit, OnChanges, OnDestroy{
   @Input() numberOfCups!: number;
   @Input() totalOfCups!: number;
-  result$?: Observable<number[]>;
 
+  submanager = new Subscription();
 
+  result$!: Observable<number[]>;
   valeurs: number[] = [];
 
 
@@ -20,34 +21,33 @@ export class WaterComponent implements OnInit, OnChanges {
     return this.document.documentElement.style.setProperty("--value", `${this.value}`)
 
   }
-  
+
   ratio!: number;
-  value:number =  (450 - 450 * this.ratio);
+  value: number = (450 - 450 * this.ratio);
 
   constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnChanges(changes: SimpleChange | any) {
-    
-    if (changes["totalOfCups"]){
-      this.result$?.subscribe(v => v.forEach(el => this.valeurs.push(el)))
-
+    this.result$ = of([this.numberOfCups, this.totalOfCups]);
+    if (changes["numberOfCups"]) {
+      this.valeurs = [];
+      
+      this.result$!.subscribe(v => v.forEach(el => this.valeurs.push(el)));
+      this.submanager.add(<Subscription><unknown>this.result$);
+      this.ratio = (this.numberOfCups/this.totalOfCups)*100;
+      this.value = (450 - 450 * (this.ratio/100));
     }
   }
   ngOnInit() {
-    this.result$ = of([this.numberOfCups, this.totalOfCups]);
+    this.result$ = of([this.numberOfCups, this.totalOfCups])
     this.result$?.subscribe(v => v.forEach(el => this.valeurs.push(el)));
-    this.ratio =( this.valeurs[0] / this.valeurs[1])/100;
-   
-    this.value =  (450 - 450 * 0.5);
-
-    this.document.documentElement.style.setProperty("--value", `${this.value}`);
-
-   console.log(this.value)
-
-   
-   
-
+    this.submanager.add(<Subscription><unknown>this.result$);
+    this.value = (450 - 450 * (this.valeurs[0] / this.valeurs[1]));
+    this.ratio = (this.numberOfCups/this.totalOfCups)*100;
   }
-    
+
+  ngOnDestroy(): void {
+      this.submanager.unsubscribe();
+  }
 
 }

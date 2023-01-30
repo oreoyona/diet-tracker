@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { every, NumberValue } from 'd3';
 import { WaterService } from 'src/app/visualisation/services/water.service';
 
 @Component({
@@ -11,6 +10,7 @@ import { WaterService } from 'src/app/visualisation/services/water.service';
 export class ChartComponent implements OnInit {
   @Input()
   public data: { ml: number; jour: string; }[] = [];
+  datum:  { ml: number; jour: string; }[] = [];
 
   //elements necessary to draw to chart
 
@@ -25,6 +25,15 @@ export class ChartComponent implements OnInit {
   public xAxis: any;
   public yAxis: any;
   public lineGroup: any;
+
+  loadData = ()=>{
+    d3.json('./assets/data.json')
+    .then((data:any) =>{
+      data.forEach((element:any) => {
+        this.datum.push(element);
+      });
+    })
+  }
 
   /**
    * initChart - initializes the elements of the chart to be drawn
@@ -42,10 +51,10 @@ export class ChartComponent implements OnInit {
       .style('transform', 'translate(' + this.margin + 'px, ' + this.margin + 'px)');
     this.yScale = d3
       .scaleLinear()
-      .domain([d3.max(this.data, (d: any) => d.ml) + 1, d3.min(this.data, (d: any) => d.ml) - 1])
+      .domain([d3.max(this.datum, (d: any) => d.ml) + 1, d3.min(this.datum, (d: any) => d.ml) - 1])
       .range([0, this.height - 2 * this.margin]);
     this.xScale = d3.scaleTime()
-      .domain(<any | Date>d3.extent(this.data, function (d) { return new Date(d.jour) }));
+      .domain(<any | Date>d3.extent(this.datum, function (d) { return new Date(d.jour) }));
 
 
     this.yAxis = this.svgInner
@@ -91,7 +100,7 @@ export class ChartComponent implements OnInit {
       .x(d => d[0])
       .y(d => d[1])
       .curve(d3.curveMonotoneX);
-    const points: [number, number][] = this.data.map(
+    const points: [number, number][] = this.datum.map(
       d => [this.xScale(new Date(d.jour)), this.yScale(d.ml)]
     );
     this.lineGroup.attr('d', line(points));
@@ -100,6 +109,7 @@ export class ChartComponent implements OnInit {
   constructor(public chartElem: ElementRef, private waterService: WaterService) { }
 
   ngOnInit() {
+    this.loadData();
     this.initChart();
     this.drawChart();
   }

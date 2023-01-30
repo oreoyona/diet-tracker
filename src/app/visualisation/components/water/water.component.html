@@ -1,9 +1,9 @@
-<ng-container *ngIf="result$ | async">
+<ng-container *ngIf="result$ | async" style="user-select: none;">
   <figure class="skill">
     <div class="outer">
       <div class="inner">
-        <div id="number">
-          {{value}}%
+        <div id="number" style="user-select: none;">
+          {{ratio}}%
         </div>
       </div>
   
