@@ -16,48 +16,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <app-water [numberOfCups]="numCup" [totalOfCups]="cupGoal" />
 
-
-
-
-    <section class="stats-container">
-      <ion-card color="danger">
-        <ion-card-content class="water-stats-menu">
-          <h3 ion-text style="font-size: large;">
-            {{currentUser.numberOfCup}}/{{cupGoal}}
-          </h3>
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card #plusCup color="secondary ion-activable" (click)="addCup(plusCup)">
-        <ion-card-content class="water-stats-menu">
-          <div class="ripple">
-            <ion-icon name="water-outline"></ion-icon><br>
-           
-          </div>
-          <div class="menu-label-container">
-            <p class="menu-label" ion-text>+1 verre</p>
-          </div>
-
-        </ion-card-content>
-      </ion-card>
-
-
-      <ion-card color="success" style="color: white;">
-        <ion-card-content class="water-stats-menu">
-          <div class="ripple">
-            <ion-icon name="restaurant-outline"></ion-icon><br>
-          </div>
-          <div class="menu-label-container">
-            <p class="menu-label" ion-text>2256 calories</p>
-          </div>
-
-        </ion-card-content>
-      </ion-card>
-    </section>
-
-    <app-toolbar></app-toolbar><app-toolbar></app-toolbar>
+   <ion-router-outlet></ion-router-outlet>
+   <app-toolbar></app-toolbar>
   </ion-content>
 
 
