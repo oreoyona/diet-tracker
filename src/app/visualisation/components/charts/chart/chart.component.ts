@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { WaterService } from 'src/app/visualisation/services/water.service';
 import Chart from 'chart.js/auto';
 @Component({
@@ -10,16 +10,22 @@ import Chart from 'chart.js/auto';
 `,
   styles: [`
   .chart-container{
-  padding: 25px;
-  margin-top:12vh;
+  margin-top:2vh;
+  position: relative;
+  bottom:0px;
+  display: flex;
   }
 
 `]
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
   public chart!: Chart;
   ngOnInit() {
     this.createChart();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      this.createChart();
   }
 
   /**
