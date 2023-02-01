@@ -1,117 +1,57 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import * as d3 from 'd3';
 import { WaterService } from 'src/app/visualisation/services/water.service';
-
+import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  template: `
+  <div class="chart-container">
+    <canvas  id="MyChart" >{{ chart }}</canvas>
+  </div>
+`,
+  styles: [`
+  .chart-container{
+  padding: 25px;
+  margin-top:12vh;
+  }
+
+`]
 })
 export class ChartComponent implements OnInit {
-  @Input()
-  public data: { ml: number; jour: string; }[] = [];
-  datum:  { ml: number; jour: string; }[] = [];
-
-  //elements necessary to draw to chart
-
-  private width = 700;
-  private height = 700;
-  private margin = 50;
-
-  public svg: any;
-  public svgInner: any;
-  public yScale: any;
-  public xScale: any;
-  public xAxis: any;
-  public yAxis: any;
-  public lineGroup: any;
-
-  loadData = ()=>{
-    d3.json('./assets/data.json')
-    .then((data:any) =>{
-      data.forEach((element:any) => {
-        this.datum.push(element);
-      });
-    })
-  }
-
-  /**
-   * initChart - initializes the elements of the chart to be drawn
-   */
-  initChart = () => {
-    this.svg = d3
-      .select(this.chartElem.nativeElement)
-      .select('.linechart')
-      .append('svg')
-      .attr('height', this.height);
-
-
-    this.svgInner = this.svg
-      .append('g')
-      .style('transform', 'translate(' + this.margin + 'px, ' + this.margin + 'px)');
-    this.yScale = d3
-      .scaleLinear()
-      .domain([d3.max(this.datum, (d: any) => d.ml) + 1, d3.min(this.datum, (d: any) => d.ml) - 1])
-      .range([0, this.height - 2 * this.margin]);
-    this.xScale = d3.scaleTime()
-      .domain(<any | Date>d3.extent(this.datum, function (d) { return new Date(d.jour) }));
-
-
-    this.yAxis = this.svgInner
-      .append('g')
-      .attr('id', 'y-axis')
-      .style('transform', 'translate(' + this.margin + 'px, 0)');
-    this.xAxis = this.svgInner
-      .append('g')
-      .attr('id', 'x-axis')
-      .style('transform', 'translate(0, ' + (this.height - 2 * this.margin) + 'px)');
-
-    this.lineGroup = this.svgInner
-      .append('g')
-      .append('path')
-      .attr('id', 'line')
-      .style('fill', 'none')
-      .style('stroke', 'red')
-      .style('stroke-width', '2px');
-  }
-
-  /**
-   * drawChart - draw the svg according to the data
-   */
-  drawChart = () => {
-    this.width = this.chartElem.nativeElement.getBoundingClientRect().width;
-    this.svg.attr('width', this.width);
-
-    this.xScale.range([this.margin, this.width - 2 * this.margin]);
-
-    const xAxis = d3
-      .axisBottom(this.xScale)
-      .ticks(10)
-      .tickFormat(<any>d3.timeFormat('%m / %Y'));
-
-    this.xAxis.call(xAxis);
-    const yAxis = d3
-      .axisRight(this.yScale);
-    this.yAxis.call(yAxis);
-
-
-    const line = d3
-      .line()
-      .x(d => d[0])
-      .y(d => d[1])
-      .curve(d3.curveMonotoneX);
-    const points: [number, number][] = this.datum.map(
-      d => [this.xScale(new Date(d.jour)), this.yScale(d.ml)]
-    );
-    this.lineGroup.attr('d', line(points));
-  }
-
-  constructor(public chartElem: ElementRef, private waterService: WaterService) { }
-
+  public chart!: Chart;
   ngOnInit() {
-    this.loadData();
-    this.initChart();
-    this.drawChart();
+    this.createChart();
+  }
+
+  /**
+   * createChart - draws the chart 
+   */
+  createChart() {
+
+    this.chart = new Chart("MyChart", {
+      type: 'bar', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi',
+          'Vendredi', 'Samedi', 'Dimanche'],
+        datasets: [
+          {
+            barThickness: 2,
+            label: "votre consommation en ml",
+            data: ['2500', '1900', '3000', '0', '500',
+              '1574', '2573'],
+            backgroundColor: '#DA22FF'
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          legend: {//Do not show the label
+            display: false
+          }
+        }
+      }
+
+    });
   }
 
 }

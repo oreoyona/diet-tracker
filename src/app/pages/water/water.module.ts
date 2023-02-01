@@ -8,6 +8,7 @@ import { WaterPageRoutingModule } from './water-routing.module';
 
 import { WaterPage } from './water.page';
 import { WaterComponent } from 'src/app/visualisation/components/water/water.component';
+import { ChartComponent } from 'src/app/visualisation/components/charts/chart/chart.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { WaterComponent } from 'src/app/visualisation/components/water/water.com
     IonicModule,
     WaterPageRoutingModule
   ],
-  declarations: [WaterPage, WaterComponent]
+  declarations: [WaterPage, WaterComponent, ChartComponent]
 })
 export class WaterPageModule {}

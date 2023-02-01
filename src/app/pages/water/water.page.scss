@@ -1,6 +1,8 @@
 :host{
     display: flex;
     justify-content: flex-start !important;
+    flex-direction: column;
+    height: 100%;
 }
 
 ion-card{
@@ -41,6 +43,9 @@ ion-card{
     flex-wrap: nowrap;
     margin: 3rem 0 0 0;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+   
     >*{
         height: 6rem;
         width: calc(100%/3);
