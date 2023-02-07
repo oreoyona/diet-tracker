@@ -4,21 +4,41 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class WaterService {
-  data = [
-    { "ml": 2500, "jour": "2020-05-12T12:19:00+00:00" },
-    { "ml": 2500, "jour": '2020-05-13T12:19:00+00:00' },
-    { "ml": 3015, "jour": '2020-05-14T12:19:00+00:00' },
-    { "ml": 0, "jour": '2020-05-15T15:19:00+00:00' },
-    { "ml": 500, "jour": '2020-05-16T12:19:00+00:00'},
-    { "ml": 2500, "jour": '2020-05-17T12:19:00+00:00' },
-    { "ml": 1500, "jour": '2020-05-18T12:19:00+00:00'},
-  ]
+  data = [];
   numberOfCupBySexe: any;
   sexes = ['homme', 'femme'];
 
+  /**
+   * findNumberOfCups - find the number of cups a person
+   * needs to drink accordingly to his sexe
+   * @param sexe(str) : the sexe of the person
+   * @returns the quantity of water to drink
+   */
   findNumberOfCups(sexe: string) {
     return sexe === this.sexes[0] ? 15.5 : 11.5;
   }
+
+
+  /**
+   * converter - converts a cup of water to ml
+   * @param numberOfCup the number of cup to be converted
+   * @returns the equivalent in ml
+   */
+  converter(numberOfCup: number){
+    return 200 * numberOfCup
+  }
+
+  /**
+   * findTheDates - computers the times of a day
+   * a person needs to drink water
+   * @returns 
+   */
+  findTheDates(){
+    let start = new Date()
+    
+  }
+
+
 
 
   constructor() { }

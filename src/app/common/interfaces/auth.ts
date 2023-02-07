@@ -23,6 +23,7 @@ export class Users {
     password?= '';
     md_number?: number ;
     sexe? = '';
+    
 
     /**
      * addCup - adds a cup of water to the user
@@ -46,6 +47,14 @@ export class Users {
         this.md_number = num;
     }
 
+    public get debutDate(): Date{
+       
+        return this.debut;
+    }
+    public get Hour():number{
+        return this.debut.getHours() + 1;
+    }
+
 
 
     
@@ -60,6 +69,7 @@ export class Users {
         password?: string,
         md_number?:number,
         sexe?: string,
+        private debut:Date = new Date()
         ) {
 
 
@@ -71,6 +81,7 @@ export class Users {
         this.password = password;
         this.md_number = md_number;
         this.sexe = sexe
+        this.debut = new Date();
 
     }
 }

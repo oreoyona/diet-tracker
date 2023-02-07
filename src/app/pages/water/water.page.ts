@@ -55,6 +55,7 @@ export class WaterPage implements OnInit {
     this.numCup = this.currentUser.numberOfCup;
     this.cupGoal = Math.round(this.waterService.findNumberOfCups(this.sexe));
    
+   
   }
   ngOnChanges(){
     this.numCup = this.currentUser.numberOfCup;
