@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { WaterService } from 'src/app/visualisation/services/water.service';
 import Chart from 'chart.js/auto';
+import { Users } from 'src/app/common/classes/Users';
 @Component({
   selector: 'app-chart',
   template: `
@@ -19,19 +19,28 @@ import Chart from 'chart.js/auto';
 `]
 })
 export class ChartComponent implements OnInit, OnChanges {
+  bruteData = localStorage.getItem("currentUser");
+  curretedData!:Users;
+
   public chart!: Chart;
   ngOnInit() {
     this.createChart();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
+    
       this.createChart();
+      console.log(this.curretedData)
   }
 
   /**
    * createChart - draws the chart 
    */
   createChart() {
+    if(this.bruteData){
+      this.curretedData = JSON.parse(this.bruteData)
+    }
+    console.log(this.curretedData)
 
     this.chart = new Chart("MyChart", {
       type: 'bar', //this denotes tha type of chart

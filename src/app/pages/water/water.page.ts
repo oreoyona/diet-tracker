@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonCard } from '@ionic/angular';
-import { Users } from 'src/app/common/interfaces/auth';
+import { Observable, of } from 'rxjs';
+import { Users } from 'src/app/common/classes/Users';
 import { WaterService } from 'src/app/visualisation/services/water.service';
 
 @Component({
@@ -17,6 +18,8 @@ export class WaterPage implements OnInit {
   sexe = 'homme';
   cupGoal!: number;
   numCup !: number;
+  data = [];
+  datum$!:Observable<Users>;
 
 
   currentUser = new Users(
@@ -43,23 +46,39 @@ export class WaterPage implements OnInit {
       }, 5000)
     }
 
+    localStorage.removeItem("currentUser");
+    localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+
   }
 
-  
+  updateData(){
+    let brute = localStorage.getItem("currentUser");
+    if(brute){
+      this.datum$ = of(JSON.parse(brute))
+    }
+   
+  }
 
-  public data:Array<any> = this.waterService.data;
 
   constructor(private waterService: WaterService) { }
 
   ngOnInit() {
     this.numCup = this.currentUser.numberOfCup;
     this.cupGoal = Math.round(this.waterService.findNumberOfCups(this.sexe));
+    this.currentUser.CupGoalSetter(this.cupGoal);
+    localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+    
    
+    
    
   }
   ngOnChanges(){
     this.numCup = this.currentUser.numberOfCup;
     this.cupGoal = Math.round(this.waterService.findNumberOfCups(this.sexe));
+    this.currentUser.numberOfCup = this.numCup;
+    
+    
+    
     
   }
 

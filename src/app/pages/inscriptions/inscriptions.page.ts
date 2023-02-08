@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, RequiredValidator, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
-import { Auth, Users } from 'src/app/common/interfaces/auth';
+import { Users } from 'src/app/common/classes/Users';
+import { Auth} from 'src/app/common/interfaces/auth';
 import { AuthService } from 'src/app/common/services/auth.service';
 @Component({
   selector: 'app-inscriptions',
