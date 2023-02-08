@@ -1,3 +1,6 @@
+/**
+ * Users - creates an Object Users 
+ */
 export class Users {
     name: string = '';
     age = 18;
@@ -123,7 +126,9 @@ export class Users {
     }
 }
 
-
+/**
+ * Homme - creates an Object Homme inheriting from Users
+ */
 export class Homme extends Users{
     recommandedFluids = 11 * this.numberOfCup;
 
