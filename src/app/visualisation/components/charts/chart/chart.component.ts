@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { Observable, of } from 'rxjs';
 import { Users } from 'src/app/common/classes/Users';
 @Component({
   selector: 'app-chart',
@@ -19,29 +20,29 @@ import { Users } from 'src/app/common/classes/Users';
 `]
 })
 export class ChartComponent implements OnInit, OnChanges {
-  bruteData = localStorage.getItem("currentUser");
-  curretedData!:Users;
+  @Input() data!: Array<Users>
+  data$!: Observable<Array<Users>>;
+  curratedData!: Array<any>;
 
   public chart!: Chart;
   ngOnInit() {
-    this.createChart();
+    this.data$ = of(this.data);
+    this.data$.subscribe(el =>{
+      this.curratedData = el;
+    })
+    
+    
   }
 
   ngOnChanges(): void {
-    
       this.createChart();
-      console.log(this.curretedData)
+     
   }
 
   /**
    * createChart - draws the chart 
    */
   createChart() {
-    if(this.bruteData){
-      this.curretedData = JSON.parse(this.bruteData)
-    }
-    console.log(this.curretedData)
-
     this.chart = new Chart("MyChart", {
       type: 'bar', //this denotes tha type of chart
 

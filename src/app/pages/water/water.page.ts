@@ -10,17 +10,10 @@ import { WaterService } from 'src/app/visualisation/services/water.service';
   styleUrls: ['./water.page.scss'],
 })
 export class WaterPage implements OnInit {
-  
-  email = '';
-  name = '';
-  age = 18;
-  diabetes = false;
-  sexe = 'homme';
-  cupGoal!: number;
-  numCup !: number;
-  data = [];
-  datum$!:Observable<Users>;
 
+  email = ''; name = ''; age = 18; diabetes = false; sexe = 'homme'; cupGoal!: number; numCup !: number;
+  data:Array<Users> = [];
+  datum$!: Observable<Users>;
 
   currentUser = new Users(
     this.name,
@@ -32,57 +25,74 @@ export class WaterPage implements OnInit {
     undefined,
     this.sexe
   )
-    /**
-     * addCup - adds a cup of water to the user records
-     */
-  addCup = (b: IonCard)=>{
-    if(this.currentUser.numberOfCup < this.cupGoal){
+
+  /**
+   * updateData - updates the data in localStorage
+   */
+  updateData() {
+    localStorage.removeItem("currentUser");
+    localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+    this.updateDataBis();
+  }
+
+  /**
+   * addCup - adds a cup of water to the user records
+   */
+  addCup = (b: IonCard) => {
+    if (this.currentUser.numberOfCup < this.cupGoal) {
       this.currentUser.addCup();
       this.numCup = this.currentUser.numberOfCup;
       b.disabled = true;
 
-      setTimeout(()=>{
+      setTimeout(() => {
         b.disabled = false;
       }, 5000)
     }
 
-    localStorage.removeItem("currentUser");
-    localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+    this.updateData();
+
 
   }
 
-  updateData(){
+  updateDataBis() {
     let brute = localStorage.getItem("currentUser");
-    if(brute){
+    if (brute) {
       this.datum$ = of(JSON.parse(brute))
     }
-   
+    this.datum$.subscribe((el:Users) => {
+      this.data.push(el);
+    })
+
   }
 
 
   constructor(private waterService: WaterService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.numCup = this.currentUser.numberOfCup;
     this.cupGoal = Math.round(this.waterService.findNumberOfCups(this.sexe));
     this.currentUser.CupGoalSetter(this.cupGoal);
     localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
+    this.updateDataBis();
+    console.log(this.currentUser.day)
     
-   
-    
-   
+
+
+
+
   }
-  ngOnChanges(){
+  async ngOnChanges() {
     this.numCup = this.currentUser.numberOfCup;
     this.cupGoal = Math.round(this.waterService.findNumberOfCups(this.sexe));
     this.currentUser.numberOfCup = this.numCup;
-    
-    
-    
-    
+    this.updateDataBis();
+
+
+
+
   }
 
 
-  
+
 
 }

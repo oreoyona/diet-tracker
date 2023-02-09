@@ -10,7 +10,7 @@ export class Users {
     password?= '';
     md_number?: number ;
     sexe? = '';
-    data?:Array<any>;
+    data?:Array<Users>;
     
 
     /**
@@ -64,6 +64,38 @@ export class Users {
     CupGoalSetter(value: number){
         this.cupGoal = value;
     }
+
+    /**
+     * save - updated the modifications brought to the object
+     * @returns a Date Object 
+     */
+    save(){
+        return new Date();
+    }
+
+    /**
+     * reset - resets the cup counter to 0
+     * @param debutHour - the debut hour
+     * @returns void
+     */
+    reset(debutHour: number){
+        let remainingHours = 24 - debutHour;
+        let seconds = 60 * remainingHours;
+        setInterval(()=>{
+            this.autoSave();
+            this.numberOfCup = 0;
+        }, seconds)
+
+    }
+
+    /**
+     * autoSave - save the latest data of the object before reset is executed
+     * 
+     */
+    autoSave(){
+        this.updated_at = new Date();
+        this.data?.push(this);
+    }
     public get cups() {
         return this.numberOfCup;
     }
@@ -90,6 +122,12 @@ export class Users {
         return this.cupGoal;
     }
 
+    public get day():string{
+        let days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimache'];
+        let day = this.debut.getDay();
+        return days[day - 1];
+    }
+
 
 
     
@@ -108,6 +146,7 @@ export class Users {
         private cupGoal:number = 0,
         private debut:Date = new Date(),
         private arr: Array<number> = [],
+        private updated_at: Date = new Date(),
        
         ) {
 
@@ -122,6 +161,8 @@ export class Users {
         this.sexe = sexe
         this.debut = new Date();
         this.data = data;
+
+        this.reset(this.Hour);
 
     }
 }

@@ -1,109 +1,42 @@
-@import '../_colors';
-
-$ht-1: 170px;
-
-$point-1: 15vw;
-$point-2: 30px;
-$point-3: 12vw;
-$point-4: 11vw;
-$point-5: 10vw;
-
-// CSS for big screens
-
-@media only screen and (min-width: 800px) {
-    :host {
-        display: grid;
-        grid-template-columns: 60% 40%;
-    }
-
-    .primary-section {
-        grid-column: 1;
-    }
-
-    .login-component {
-        grid-column: 2;
-    }
-}
-
-* {
-    transition: all 1s ease-in-out;
-}
-
 .primary-section {
     height: 100%;
+    background-size: cover;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow: hidden;
-    font-family: cursive;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
 }
 
-.primary-section-body{
-    margin: 0 0 20px 0;
-}
-
-.primary-section-p1 {
-    background-color: $bg-2;
-}
-
-.primary-section-p2 {
-    background-color: $bg-6;
-}
-
-.primary-section-p3 {
-    background-color: $bg-10;
-}
-
-h1 {
-    font-size: 1.7em;
-    font-weight: 400;
-    margin: 0 0 $point-2 0;
-}
-
-.primary-section-text-1,
-.primary-section-text-1-p3 {
-    color: $bg-4;
-
-}
-
-.primary-section-text-1-p2 {
-    color: $bg-1;
-}
-
-
-
-
-h4 {
-    font-weight: 300;
-    line-height: 1.5em;
-
-}
-
-.h4-1 {
-    color: $bg-1;
-}
-
-.h4-2 {
-    color: $bg-1;
-}
-
-.home-footer {
+.animated-area{
     position: absolute;
-    bottom: 10px;
-    right: 50%;
-    left: 40%;
-    
-   
-    button{
-        color: inherit !important;
-        font-size: 1.4rem;
-        font-family: cursive;
-        :hover{
-            transform: scale(1.001);
-        }
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-size: cover;
+}
+#animated-area {
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    animation: animatedBackground 10s ease-in-out infinite alternate-reverse;
+}
+.action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    width: 70vw;
+    background-color: rgba(0, 0, 0, 0.284);
+    border: 1px solid white;
+    z-index: 3;
+}
 
+
+@keyframes animatedBackground {
+    from {
+       background-position: 0 0;
+    }
+
+    to {
+        background-position: 100% 0;
     }
 }
-ion-icon {
-    font-size: 54px;
-  }

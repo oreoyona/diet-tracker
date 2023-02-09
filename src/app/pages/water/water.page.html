@@ -1,4 +1,4 @@
-<app-water [numberOfCups]="numCup" [totalOfCups]="cupGoal" />
+<app-water [numberOfCups]="currentUser.numberOfCup" [totalOfCups]="cupGoal" />
 
 
 <section class="stats-container">
@@ -36,4 +36,4 @@
     </ion-card-content>
   </ion-card>
 </section>
-<app-chart/>
+<app-chart [data]="data" />
