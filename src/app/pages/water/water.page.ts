@@ -65,6 +65,13 @@ export class WaterPage implements OnInit {
 
   }
 
+  
+
+
+
+
+
+
 
   constructor(private waterService: WaterService) { }
 
@@ -74,12 +81,6 @@ export class WaterPage implements OnInit {
     this.currentUser.CupGoalSetter(this.cupGoal);
     localStorage.setItem("currentUser", JSON.stringify(this.currentUser));
     this.updateDataBis();
-    console.log(this.currentUser.day)
-    
-
-
-
-
   }
   async ngOnChanges() {
     this.numCup = this.currentUser.numberOfCup;
