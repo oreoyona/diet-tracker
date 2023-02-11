@@ -10,7 +10,7 @@ export class Users {
     password?= '';
     md_number?: number;
     sexe?= '';
-    data?: Array<Users>;
+    data: Array<any>;
 
 
     /**
@@ -65,33 +65,33 @@ export class Users {
         this.cupGoal = value;
     }
     /**
+    * save - updated the modifications brought to the object
+    * @returns void
+    */
+    save() {
+        this.updated_at = new Date();
+        this.data.push({
+            ml: this.numberOfCup * 200,
+            date: this.updated_at
+        });
+    }
+    /**
     * reset - resets the cup counter to 0
     * @param debutHour - the debut hour
     * @returns void
     */
     reset(debutHour: number) {
         let remainingHours = 24 - debutHour;
-        let seconds = 60 * remainingHours;
-        seconds = 2000;
-
-        setInterval(()=>{
-            setTimeout(() => {
-                this.numberOfCup = 0;
-                this.updated_at = this.save();
-            }, seconds);
+        let seconds = 60000 * remainingHours;
+        setInterval(() => {
+            this.save();
+            this.debut = new Date();
+            this.numberOfCup = 0
         }, seconds)
-       
-
     }
-        /**
-         * save - updated the modifications brought to the object
-         * @returns a Date Object 
-         */
-        save(){
-            return new Date();
-        }
 
-   
+
+
     public get cups() {
         return this.numberOfCup;
     }
@@ -132,7 +132,7 @@ export class Users {
         password?: string,
         md_number?: number,
         sexe?: string,
-        data?: Array<any>,
+        data: Array<any> = [],
         private cupGoal: number = 0,
         private debut: Date = new Date(),
         private arr: Array<number> = [],
